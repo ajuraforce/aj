@@ -1,0 +1,199 @@
+/* Live Alerts Page Styles */
+
+.table td, .table th {
+  vertical-align: middle;
+  padding: 0.75rem 0.5rem;
+}
+
+.progress {
+  height: 20px;
+  min-width: 120px;
+}
+
+.progress-bar {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.table-responsive {
+  border-radius: 0.375rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card {
+  border: none;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  border-radius: 0.5rem;
+}
+
+.card-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem 0.5rem 0 0 !important;
+  border: none;
+}
+
+.nav-tabs .nav-link {
+  border: none;
+  color: #6c757d;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #495057;
+  background-color: #f8f9fa;
+  border-radius: 0.375rem 0.375rem 0 0;
+}
+
+.nav-tabs .nav-link.active {
+  color: #495057;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+  border-radius: 0.375rem 0.375rem 0 0;
+  font-weight: 600;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+}
+
+.text-success {
+  color: #198754 !important;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+}
+
+.text-warning {
+  color: #fd7e14 !important;
+}
+
+code {
+  background-color: #f8f9fa;
+  color: #e83e8c;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.progress-stacked {
+  margin-top: 1rem;
+}
+
+.progress-stacked .progress {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.alert {
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+}
+
+.alert-info {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  color: #1976d2;
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+  color: #d32f2f;
+}
+
+.spinner-border {
+  color: #667eea;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+  
+  .nav-tabs .nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .card-header {
+    font-size: 0.9rem;
+  }
+  
+  .progress {
+    min-width: 80px;
+    height: 16px;
+  }
+  
+  .badge {
+    font-size: 0.6875rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+/* Animation for new alerts */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.table tbody tr:first-child {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Hover effects */
+.table tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+  transition: background-color 0.2s ease;
+}
+
+/* Status indicators */
+.badge.bg-success {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+}
+
+.badge.bg-danger {
+  background: linear-gradient(135deg, #dc3545 0%, #e74c3c 100%) !important;
+}
+
+.badge.bg-primary {
+  background: linear-gradient(135deg, #007bff 0%, #6610f2 100%) !important;
+}
+
+.badge.bg-secondary {
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%) !important;
+}
+
+/* Performance indicators */
+.list-unstyled li {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.list-unstyled li:last-child {
+  border-bottom: none;
+}
+
+/* Loading spinner styling */
+.text-center {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.text-center p {
+  margin-top: 1rem;
+  color: #6c757d;
+  font-weight: 500;
+}
