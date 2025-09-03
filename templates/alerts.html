@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerts - AjxAI Trading Platform</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* Bootstrap Icons - Hardcoded content for reliable display */
+        .bi {
+            font-family: "bootstrap-icons" !important;
+            font-style: normal !important;
+            font-weight: normal !important;
+            font-variant: normal !important;
+            text-transform: none !important;
+            line-height: 1 !important;
+            vertical-align: -.125em !important;
+            -webkit-font-smoothing: antialiased !important;
+            -moz-osx-font-smoothing: grayscale !important;
+            display: inline-block !important;
+            font-size: inherit !important;
+        }
+        
+        .bi::before {
+            font-family: "bootstrap-icons" !important;
+            display: inline-block !important;
+        }
+        
+        /* Hardcoded content values for reliable icon display */
+        .bi-speedometer2::before { content: "\f5d9"; }
+        .bi-bell::before { content: "\f1f3"; }
+        .bi-arrow-left-right::before { content: "\f1d4"; }
+        .bi-briefcase::before { content: "\f1f9"; }
+        .bi-graph-up::before { content: "\f384"; }
+        .bi-funnel::before { content: "\f33d"; }
+        .bi-clock-history::before { content: "\f292"; }
+        .bi-people::before { content: "\f4f2"; }
+        .bi-gear::before { content: "\f33e"; }
+        .bi-person-circle::before { content: "\f4fd"; }
+        .bi-graph-up-arrow::before { content: "\f386"; }
+        
+        /* Ensure navbar icons are visible and properly sized */
+        .navbar .bi {
+            font-size: 1rem !important;
+            margin-right: 0.25rem !important;
+            display: inline-block !important;
+        }
+    </style>
+    
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+    
+    <style>
+        .alert-message {
+            max-width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .table td {
+            vertical-align: middle;
+        }
+        .progress {
+            min-width: 80px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation" aria-label="Main navigation">
+        <div class="container-fluid">
+            <!-- Brand/Logo on the left -->
+            <a class="navbar-brand fw-bold" href="/" aria-label="AjxAI Home">
+                <i class="bi bi-graph-up-arrow me-2" aria-hidden="true"></i>AjxAI
+            </a>
+            
+            <!-- Hamburger menu toggle for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Center navigation links -->
+                <ul class="navbar-nav mx-auto" role="menubar">
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="/" role="menuitem" aria-label="Dashboard">
+                            <i class="bi bi-speedometer2 me-1" aria-hidden="true"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link active" href="/alerts" role="menuitem" aria-label="Alerts">
+                            <i class="bi bi-bell me-1" aria-hidden="true"></i>Alerts
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="/live-alerts" role="menuitem" aria-label="Live Alerts">
+                            <i class="bi bi-activity me-1" aria-hidden="true"></i>Live Alerts
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="/trades" role="menuitem" aria-label="Trades">
+                            <i class="bi bi-arrow-left-right me-1" aria-hidden="true"></i>Trades
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="/portfolio" role="menuitem" aria-label="Portfolio">
+                            <i class="bi bi-briefcase me-1" aria-hidden="true"></i>Portfolio
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="/analysis" role="menuitem" aria-label="Analysis">
+                            <i class="bi bi-graph-up me-1" aria-hidden="true"></i>Analysis
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="/screening" role="menuitem" aria-label="Screening">
+                            <i class="bi bi-funnel me-1" aria-hidden="true"></i>Screening
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="/backtesting" role="menuitem" aria-label="Backtesting">
+                            <i class="bi bi-clock-history me-1" aria-hidden="true"></i>Backtesting
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="/community" role="menuitem" aria-label="Community">
+                            <i class="bi bi-people me-1" aria-hidden="true"></i>Community
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="/settings" role="menuitem" aria-label="Settings">
+                            <i class="bi bi-gear me-1" aria-hidden="true"></i>Settings
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- User profile dropdown on the right -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
+                           data-bs-toggle="dropdown" aria-expanded="false" aria-label="User menu">
+                            <i class="bi bi-person-circle me-1" aria-hidden="true"></i>
+                            <span class="d-md-inline d-none">User</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="/profile" aria-label="View Profile">
+                                    <i class="bi bi-person me-2" aria-hidden="true"></i>Profile
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider" role="separator"></li>
+                            <li>
+                                <a class="dropdown-item" href="/logout" aria-label="Logout">
+                                    <i class="bi bi-box-arrow-right me-2" aria-hidden="true"></i>Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="alerts-root">
+        <!-- Content will be rendered by JavaScript -->
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Ensure Bootstrap Icons load properly -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Force font loading and ensure icons display
+            const iconFont = new FontFace('bootstrap-icons', 'url(https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/fonts/bootstrap-icons.woff2)');
+            iconFont.load().then(() => {
+                document.fonts.add(iconFont);
+                // Force re-render of icons
+                document.querySelectorAll('.bi').forEach(icon => {
+                    icon.style.fontFamily = 'bootstrap-icons';
+                });
+            });
+        });
+    </script>
+    
+    <!-- Alerts JavaScript -->
+    <script src="{{ url_for('static', filename='js/alerts.js') }}"></script>
+</body>
+</html>
