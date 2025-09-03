@@ -1,0 +1,15 @@
+{
+  "backup_timestamp": "2025-09-03T16:34:13.687482",
+  "total_records": 0,
+  "tables_exported": 0,
+  "backup_file": "database_backup/complete_database_backup_20250903_163413.json",
+  "database_schema": {
+    "pattern_outcomes": 0,
+    "asset_mentions": 0,
+    "correlations": 0,
+    "causal_hypotheses": 0,
+    "causal_tests": 0,
+    "trading_signals": 0,
+    "backup_records": 0
+  }
+}
