@@ -1,0 +1,256 @@
+{
+  "scanners": {
+    "reddit": true,
+    "binance": true,
+    "nse": true,
+    "news": true,
+    "google_trends": false,
+    "twitter": false,
+    "scan_interval_seconds": 30
+  },
+  "ai": {
+    "cheap_sentiment": true,
+    "deep_gpt": true,
+    "deep_trigger_score": 0.7,
+    "deep_trigger_correlation": 0.6,
+    "deep_trigger_pattern_count": 5,
+    "openai_model": "gpt-5",
+    "max_tokens": 500,
+    "temperature": 1.0,
+    "cost_limit_daily_usd": 10.0
+  },
+  "alerts": {
+    "telegram": true,
+    "email": false,
+    "discord": false,
+    "threshold_weak": 0.3,
+    "threshold_medium": 0.4,
+    "threshold_strong": 0.7,
+    "max_alerts_per_hour": 5
+  },
+  "database": {
+    "path": "patterns.db",
+    "backup_interval_hours": 6,
+    "cleanup_days": 30
+  },
+  "trading": {
+    "simulation_mode": true,
+    "max_position_size_usd": 1000,
+    "risk_per_trade": 0.02,
+    "max_positions": 5,
+    "stop_loss_percent": 0.05,
+    "take_profit_percent": 0.10
+  },
+  "pattern_analysis": {
+    "time_decay_half_life_hours": 6,
+    "mention_spike_zscore_threshold": 2.0,
+    "sector_spike_min_assets": 3,
+    "sector_correlation_threshold": 0.7,
+    "cross_source_correlation_threshold": 0.6
+  },
+  "risk_management": {
+    "max_daily_trades": 10,
+    "cool_down_minutes": 15,
+    "emergency_stop": false,
+    "position_concentration_limit": 0.3
+  },
+  "monitoring": {
+    "log_level": "INFO",
+    "health_check_interval_seconds": 60,
+    "performance_metrics": true,
+    "error_notification": true
+  },
+  "multi_timeframe": {
+    "windows": ["1h", "4h", "1d"],
+    "confirmation_threshold": 0.7,
+    "weight_multiplier": 1.5
+  },
+  "correlation_analysis": {
+    "window_size": 100,
+    "break_threshold": 0.3,
+    "significance_level": 0.95,
+    "cross_market_pairs": ["BTC/NIFTY", "ETH/BANKNIFTY"]
+  },
+  "signal_engine": {
+    "min_confidence": 0.6,
+    "rules": {
+      "bullish_breakout": {
+        "conditions": ["price_spike", "volume_confirmation", "sentiment_positive"],
+        "action": "BUY",
+        "risk_level": "medium"
+      }
+    }
+  },
+  "portfolio_optimization": {
+    "max_sector_exposure": 0.3,
+    "max_single_asset": 0.15,
+    "rebalance_frequency": "daily",
+    "risk_target": 0.65
+  },
+  "smart_alerts": {
+    "user_preferences": {
+      "max_daily_alerts": 10,
+      "preferred_confidence": 0.7,
+      "quiet_hours": ["22:00", "06:00"]
+    },
+    "clustering_window": "1h",
+    "fatigue_threshold": 5
+  },
+  "phase5_features": {
+    "ai_forecasting": {
+      "enabled": true,
+      "forecast_horizons": {
+        "market": 7,
+        "geopolitics": 30,
+        "stocks": 14,
+        "companies": 21
+      },
+      "confidence_threshold": 0.7,
+      "prophet_settings": {
+        "daily_seasonality": true,
+        "yearly_seasonality": true,
+        "uncertainty_samples": 100,
+        "changepoint_prior_scale": 0.05
+      }
+    },
+    "community_simulation": {
+      "enabled": true,
+      "max_posts_simulated": 10,
+      "engagement_multiplier": 1.5,
+      "viral_threshold": {
+        "comment_velocity": 5,
+        "upvote_ratio": 0.8,
+        "cross_platform_mentions": 3
+      },
+      "user_personas": 5,
+      "response_probability": 0.6
+    },
+    "user_acquisition": {
+      "enabled": true,
+      "platforms": ["twitter", "reddit", "telegram"],
+      "campaign_settings": {
+        "acquisition": {
+          "posting_frequency": "high",
+          "target_new_users": 500,
+          "duration_days": 14
+        },
+        "engagement": {
+          "posting_frequency": "medium", 
+          "target_engagement_rate": 0.15,
+          "duration_days": 7
+        },
+        "conversion": {
+          "posting_frequency": "low",
+          "target_conversion_rate": 0.05,
+          "duration_days": 5
+        }
+      },
+      "seo_optimization": true,
+      "content_templates": true
+    },
+    "telegram_engagement": {
+      "enabled": true,
+      "subscription_tiers": {
+        "free": {
+          "signal_limit": 3,
+          "analysis_access": "basic"
+        },
+        "premium": {
+          "price": 29.99,
+          "signal_limit": -1,
+          "analysis_access": "advanced"
+        },
+        "vip": {
+          "price": 99.99,
+          "signal_limit": -1,
+          "analysis_access": "vip",
+          "consultation_hours": 2
+        }
+      },
+      "auto_responses": true,
+      "community_challenges": true,
+      "monetization": true
+    }
+  },
+  "rss_feeds": {
+    "geopolitics": {
+      "Reuters World News": "http://feeds.reuters.com/Reuters/worldNews",
+      "Reuters India": "http://feeds.reuters.com/reuters/INtopNews",
+      "Al Jazeera English": "https://www.aljazeera.com/xml/rss/all.xml",
+      "BBC World": "http://feeds.bbci.co.uk/news/world/rss.xml",
+      "The Diplomat": "https://thediplomat.com/feed/",
+      "Stratfor Worldview": "https://worldview.stratfor.com/feed"
+    },
+    "finance": {
+      "Reuters Business/Markets": "http://feeds.reuters.com/reuters/businessNews",
+      "Bloomberg Markets": "https://news.google.com/rss/search?q=Bloomberg+Markets",
+      "Business Standard": "https://www.business-standard.com/rss/latest.rss",
+      "The Economic Times (Markets)": "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms",
+      "Financial Times World": "https://www.ft.com/?format=rss"
+    },
+    "crypto": {
+      "CoinDesk": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+      "CoinTelegraph": "https://cointelegraph.com/rss",
+      "Decrypt": "https://decrypt.co/feed",
+      "Bitcoin Magazine": "https://bitcoinmagazine.com/feed",
+      "Messari News": "https://messari.io/rss",
+      "Google News Crypto": "https://news.google.com/rss/search?q=cryptocurrency"
+    }
+  },
+  "rss_scan_interval_seconds": 900,
+  "rss_analysis_batch_size": 50,
+  "ai_strategist_features": {
+    "event_normalization": {
+      "enabled": true,
+      "event_types": {
+        "policy_signal": ["policy", "rbi", "fed", "rate", "monetary", "fiscal"],
+        "liquidity_shift": ["liquidity", "funding", "repo", "treasury", "m2", "money supply"],
+        "flow_spike": ["whale", "block trade", "institutional", "volume spike", "options flow"],
+        "microstructure": ["bid ask", "spread", "volatility", "level break", "support", "resistance"],
+        "sentiment_swing": ["sentiment", "fear", "greed", "bullish", "bearish", "optimistic"],
+        "earnings_surprise": ["earnings", "revenue", "profit", "guidance", "results"],
+        "technical_break": ["breakout", "breakdown", "trend", "pattern", "moving average"]
+      },
+      "confidence_threshold": 0.5
+    },
+    "knowledge_graph": {
+      "enabled": true,
+      "decay_settings": {
+        "half_life_hours": 48,
+        "prune_threshold": 0.1,
+        "maintenance_interval": "daily"
+      },
+      "auto_linking": true,
+      "max_graph_size": 10000
+    },
+    "regime_detection": {
+      "enabled": true,
+      "thresholds": {
+        "vix_low": 16,
+        "vix_high": 20,
+        "vol_low": 0.15,
+        "vol_high": 0.25,
+        "dxy_momentum": 0.02,
+        "funding_rate_threshold": 0.0001
+      },
+      "hysteresis_periods": 2,
+      "update_frequency": "hourly"
+    },
+    "causal_analysis": {
+      "enabled": true,
+      "parameters": {
+        "max_lag": 5,
+        "min_observations": 50,
+        "significance_threshold": 0.05,
+        "effect_size_threshold": 0.1,
+        "confidence_threshold": 0.6
+      },
+      "test_pairs": [
+        ["BTC", "ETH"],
+        ["NIFTY", "BANKNIFTY"],
+        ["USD", "INR"],
+        ["GOLD", "SILVER"]
+      ]
+    }
+  }
+}
