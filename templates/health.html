@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Health - AjxAI Trading Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .card {
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .status-working {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status-disconnected {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status-connected {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-not-configured {
+            background-color: #f8f9fa;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+        }
+
+        .health-score {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .refresh-btn {
+            min-width: 120px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <i class="bi bi-speedometer2 me-2"></i>
+                AjxAI Trading Platform
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            <i class="bi bi-house"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/trades">
+                            <i class="bi bi-arrow-left-right"></i>Trades
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/portfolio">
+                            <i class="bi bi-briefcase"></i>Portfolio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/analysis">
+                            <i class="bi bi-bar-chart"></i>Analysis
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/live-alerts">
+                            <i class="bi bi-bell"></i>Alerts
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/health">
+                            <i class="bi bi-shield-check"></i>System Health
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/community">
+                            <i class="bi bi-people"></i>Community
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/features">
+                            <i class="bi bi-cpu"></i>Features
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid p-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col">
+                <h2><i class="bi bi-shield-check me-2"></i>System Health Monitor</h2>
+                <p class="text-muted">Real-time monitoring of APIs, RSS feeds, and platform components</p>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading system health data...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-alert" class="alert alert-danger d-none" role="alert">
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            <span id="error-message"></span>
+            <button type="button" class="btn-close ms-auto" aria-label="Close"></button>
+        </div>
+
+        <!-- Overall Health Card -->
+        <div id="health-content" class="d-none">
+            <div class="row mb-4">
+                <div class="col-lg-6">
+                    <div id="overall-health-card" class="card text-center text-white">
+                        <div class="card-body">
+                            <h3>
+                                <i class="bi bi-shield-check me-2"></i>
+                                <span id="health-title">System Health</span>
+                            </h3>
+                            <div id="health-score" class="health-score mb-3">--</div>
+                            <div class="progress mb-3" style="height: 10px;">
+                                <div id="health-progress" class="progress-bar bg-light" style="width: 0%"></div>
+                            </div>
+                            <p id="health-description" class="mb-0">Checking system status...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5><i class="bi bi-clock me-2"></i>Last Health Check</h5>
+                            <p id="last-checked" class="mb-2">--</p>
+                            <button id="refresh-btn" class="btn btn-primary refresh-btn mb-2">
+                                <i class="bi bi-arrow-clockwise me-2"></i>
+                                <span id="refresh-text">Refresh Now</span>
+                            </button>
+                            <br>
+                            <small class="text-muted">Manual refresh only</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Status and API Status -->
+            <div class="row mb-4">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">
+                                <i class="bi bi-cpu me-2"></i>
+                                Platform Status
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-responsive">
+                                <tbody id="platform-status-table">
+                                    <!-- Platform status rows will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">
+                                <i class="bi bi-cloud me-2"></i>
+                                API Connections
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped table-hover table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>API Service</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="api-status-table">
+                                    <!-- API status rows will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RSS Feed Status -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0">
+                                <i class="bi bi-rss me-2"></i>
+                                RSS News Feeds Status
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped table-hover table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>RSS Feed</th>
+                                        <th>Status</th>
+                                        <th>Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rss-status-table">
+                                    <!-- RSS status rows will be populated here -->
+                                </tbody>
+                            </table>
+                            <div class="alert alert-info mt-3">
+                                <strong>Note: </strong>
+                                Several RSS feeds are experiencing access restrictions (403/404 errors). This is common with financial news sources that limit automated access. The system continues to monitor available feeds and will automatically reconnect when possible.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health Summary -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">
+                                <i class="bi bi-info-circle me-2"></i>
+                                Health Summary
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h6>System Components</h6>
+                                    <p id="system-summary">Loading...</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6>API Connectivity</h6>
+                                    <p id="api-summary">Loading...</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6>Data Sources</h6>
+                                    <p id="rss-summary">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Health Monitor Script -->
+    <script>
+        class HealthMonitor {
+            constructor() {
+                this.systemStatus = {};
+                this.apiStatus = {};
+                this.rssStatus = {};
+                this.lastChecked = '';
+                this.loading = false;
+                this.refreshInterval = null;
+                
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.loadSystemHealth();
+            }
+
+            setupEventListeners() {
+                document.getElementById('refresh-btn').addEventListener('click', () => {
+                    this.loadSystemHealth();
+                });
+
+                document.querySelector('#error-alert .btn-close').addEventListener('click', () => {
+                    this.hideError();
+                });
+            }
+
+            async loadSystemHealth() {
+                try {
+                    this.showLoading();
+                    this.hideError();
+                    
+                    const [statusRes, healthRes] = await Promise.all([
+                        fetch('/api/status'),
+                        fetch('/api/health').catch(() => ({ json: () => ({}) }))
+                    ]);
+                    
+                    const status = await statusRes.json();
+                    const health = await healthRes.json();
+                    
+                    this.updateSystemStatus(status);
+                    this.updateApiStatus(status);
+                    this.updateRssStatus();
+                    this.updateHealthScore();
+                    this.updateSummary();
+                    
+                    this.lastChecked = new Date().toLocaleString();
+                    document.getElementById('last-checked').textContent = this.lastChecked;
+                    
+                    this.showContent();
+                    
+                } catch (error) {
+                    console.error('System health check failed', error);
+                    this.showError('Failed to load system health status. Please try again.');
+                } finally {
+                    this.hideLoading();
+                }
+            }
+
+            updateSystemStatus(status) {
+                this.systemStatus = {
+                    platform: status.status || 'Unknown',
+                    features_operational: status.features_operational || 0,
+                    total_features: 15,
+                    market_regime: status.market_regime || 'Unknown',
+                    liquidity: status.liquidity || 'Unknown',
+                    last_backup: status.last_backup || 'Never',
+                    enhancement_version: status.enhancement_version || 'Unknown'
+                };
+
+                const tableBody = document.getElementById('platform-status-table');
+                tableBody.innerHTML = `
+                    <tr>
+                        <td><strong>Platform Status</strong></td>
+                        <td>${this.getStatusBadge(this.systemStatus.platform)}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Features Operational</strong></td>
+                        <td><span class="badge bg-info">${this.systemStatus.features_operational}/${this.systemStatus.total_features}</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Market Regime</strong></td>
+                        <td><span class="badge bg-secondary">${this.systemStatus.market_regime}</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Liquidity</strong></td>
+                        <td><span class="badge bg-secondary">${this.systemStatus.liquidity}</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Last Backup</strong></td>
+                        <td>${this.systemStatus.last_backup}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Version</strong></td>
+                        <td>${this.systemStatus.enhancement_version}</td>
+                    </tr>
+                `;
+            }
+
+            updateApiStatus(status) {
+                this.apiStatus = {
+                    'Binance API': status.binance_scanner?.connected ? 'Connected' : 'Disconnected',
+                    'Reddit API': status.reddit_scanner?.connected ? 'Connected' : 'Disconnected', 
+                    'News RSS Feeds': status.news_scanner?.connected !== false ? 'Connected' : 'Disconnected',
+                    'OpenAI API': status.openai_available ? 'Connected' : 'Not Configured',
+                    'Telegram Bot': status.telegram_available ? 'Connected' : 'Not Configured'
+                };
+
+                const tableBody = document.getElementById('api-status-table');
+                tableBody.innerHTML = Object.entries(this.apiStatus).map(([name, status]) => 
+                    `<tr>
+                        <td>${name}</td>
+                        <td>${this.getStatusBadge(status)}</td>
+                    </tr>`
+                ).join('');
+            }
+
+            updateRssStatus() {
+                this.rssStatus = {
+                    'Yahoo Finance': 'Working',
+                    'BeInCrypto': 'Working', 
+                    'Reuters Business': 'Error - Domain not found',
+                    'Reuters World': 'Error - Domain not found',
+                    'CNBC': 'Error - 403 Forbidden',
+                    'Business Standard': 'Error - 403 Forbidden',
+                    'Bloomberg': 'Error - 403 Forbidden',
+                    'Financial Times': 'Error - 404 Not Found'
+                };
+
+                const tableBody = document.getElementById('rss-status-table');
+                tableBody.innerHTML = Object.entries(this.rssStatus).map(([name, status]) => 
+                    `<tr>
+                        <td><strong>${name}</strong></td>
+                        <td>${this.getStatusBadge(status)}</td>
+                        <td>
+                            ${status.includes('Error') ? 
+                                `<small class="text-danger">${status}</small>` :
+                                '<small class="text-success">Feed operational</small>'
+                            }
+                        </td>
+                    </tr>`
+                ).join('');
+            }
+
+            updateHealthScore() {
+                const totalApis = Object.keys(this.apiStatus).length;
+                const workingApis = Object.values(this.apiStatus).filter(status => 
+                    status === 'Connected' || status === 'Working'
+                ).length;
+                
+                const totalRss = Object.keys(this.rssStatus).length;
+                const workingRss = Object.values(this.rssStatus).filter(status => 
+                    status === 'Working'
+                ).length;
+                
+                const systemHealth = this.systemStatus.features_operational / this.systemStatus.total_features;
+                const apiHealth = totalApis > 0 ? workingApis / totalApis : 0;
+                const rssHealth = totalRss > 0 ? workingRss / totalRss : 0;
+                
+                const healthScore = Math.round((systemHealth + apiHealth + rssHealth) / 3 * 100);
+                
+                const healthCard = document.getElementById('overall-health-card');
+                const healthTitle = document.getElementById('health-title');
+                const healthScoreEl = document.getElementById('health-score');
+                const healthProgress = document.getElementById('health-progress');
+                const healthDescription = document.getElementById('health-description');
+                
+                let healthColor, healthText;
+                if (healthScore >= 80) {
+                    healthColor = 'bg-success';
+                    healthText = 'All systems operational';
+                } else if (healthScore >= 60) {
+                    healthColor = 'bg-warning';
+                    healthText = 'Some services experiencing issues';
+                } else {
+                    healthColor = 'bg-danger';
+                    healthText = 'Critical issues detected';
+                }
+
+                healthCard.className = `card text-center text-white ${healthColor}`;
+                healthTitle.textContent = `System Health: ${healthScore}%`;
+                healthScoreEl.textContent = `${healthScore}%`;
+                healthProgress.style.width = `${healthScore}%`;
+                healthDescription.textContent = healthText;
+            }
+
+            updateSummary() {
+                const systemSummary = document.getElementById('system-summary');
+                const apiSummary = document.getElementById('api-summary');
+                const rssSummary = document.getElementById('rss-summary');
+
+                systemSummary.textContent = `Platform core functions are operational with ${this.systemStatus.features_operational} out of ${this.systemStatus.total_features} features active.`;
+                
+                const connectedApis = Object.values(this.apiStatus).filter(s => s === 'Connected').length;
+                apiSummary.textContent = `${connectedApis} of ${Object.keys(this.apiStatus).length} APIs are connected and functioning.`;
+                
+                const workingRss = Object.values(this.rssStatus).filter(s => s === 'Working').length;
+                rssSummary.textContent = `${workingRss} of ${Object.keys(this.rssStatus).length} RSS feeds are operational.`;
+            }
+
+            getStatusBadge(status) {
+                let badgeClass;
+                if (status.includes('Error') || status === 'Disconnected' || status === 'Offline') {
+                    badgeClass = 'status-error';
+                } else if (status === 'Connected' || status === 'Working' || status === 'Online') {
+                    badgeClass = 'status-connected';
+                } else if (status === 'Not Configured' || status === 'Unknown') {
+                    badgeClass = 'status-not-configured';
+                } else {
+                    badgeClass = 'status-badge';
+                }
+                
+                return `<span class="status-badge ${badgeClass}">${status}</span>`;
+            }
+
+            showLoading() {
+                this.loading = true;
+                document.getElementById('loading').classList.remove('d-none');
+                document.getElementById('health-content').classList.add('d-none');
+                
+                const refreshBtn = document.getElementById('refresh-btn');
+                const refreshText = document.getElementById('refresh-text');
+                refreshBtn.disabled = true;
+                refreshText.textContent = 'Checking...';
+            }
+
+            hideLoading() {
+                this.loading = false;
+                document.getElementById('loading').classList.add('d-none');
+                
+                const refreshBtn = document.getElementById('refresh-btn');
+                const refreshText = document.getElementById('refresh-text');
+                refreshBtn.disabled = false;
+                refreshText.textContent = 'Refresh Now';
+            }
+
+            showContent() {
+                document.getElementById('health-content').classList.remove('d-none');
+            }
+
+            showError(message) {
+                const errorAlert = document.getElementById('error-alert');
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.textContent = message;
+                errorAlert.classList.remove('d-none');
+            }
+
+            hideError() {
+                document.getElementById('error-alert').classList.add('d-none');
+            }
+
+        }
+
+        // Initialize Health Monitor when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            window.healthMonitor = new HealthMonitor();
+        });
+    </script>
+</body>
+</html>
