@@ -1,0 +1,119 @@
+{
+  "sectors": {
+    "BANKING": {
+      "assets": ["HDFCBANK", "ICICIBANK", "SBIN", "KOTAKBANK", "AXISBANK", "INDUSINDBK"],
+      "description": "Banking and Financial Services",
+      "correlation_threshold": 0.7,
+      "volatility": "medium"
+    },
+    "IT": {
+      "assets": ["TCS", "INFY", "WIPRO", "HCLTECH", "TECHM", "LTIM"],
+      "description": "Information Technology",
+      "correlation_threshold": 0.8,
+      "volatility": "low"
+    },
+    "PHARMA": {
+      "assets": ["SUNPHARMA", "DRREDDY", "CIPLA", "DIVISLAB", "AUROPHARMA"],
+      "description": "Pharmaceuticals",
+      "correlation_threshold": 0.6,
+      "volatility": "high"
+    },
+    "ENERGY": {
+      "assets": ["RELIANCE", "ONGC", "NTPC", "POWERGRID", "COALINDIA"],
+      "description": "Energy and Power",
+      "correlation_threshold": 0.7,
+      "volatility": "high"
+    },
+    "FMCG": {
+      "assets": ["ITC", "NESTLEIND", "BRITANNIA", "HINDUNILVR", "DABUR"],
+      "description": "Fast Moving Consumer Goods",
+      "correlation_threshold": 0.5,
+      "volatility": "low"
+    },
+    "AUTO": {
+      "assets": ["MARUTI", "TATAMOTORS", "M&M", "BAJAJ-AUTO", "EICHERMOT"],
+      "description": "Automotive",
+      "correlation_threshold": 0.6,
+      "volatility": "medium"
+    },
+    "METALS": {
+      "assets": ["HINDALCO", "TATASTEEL", "JSWSTEEL", "NALCO", "VEDL"],
+      "description": "Metals and Mining",
+      "correlation_threshold": 0.8,
+      "volatility": "high"
+    },
+    "TELECOM": {
+      "assets": ["BHARTIARTL", "IDEA", "RELIANCE"],
+      "description": "Telecommunications",
+      "correlation_threshold": 0.7,
+      "volatility": "medium"
+    },
+    "CRYPTO_LARGE": {
+      "assets": ["BTC", "ETH", "BNB", "ADA", "XRP"],
+      "description": "Large Cap Cryptocurrencies",
+      "correlation_threshold": 0.6,
+      "volatility": "very_high"
+    },
+    "CRYPTO_MID": {
+      "assets": ["SOL", "MATIC", "DOT", "AVAX", "LINK"],
+      "description": "Mid Cap Cryptocurrencies", 
+      "correlation_threshold": 0.5,
+      "volatility": "very_high"
+    },
+    "DEFI": {
+      "assets": ["UNI", "AAVE", "COMP", "MKR", "SNX"],
+      "description": "Decentralized Finance",
+      "correlation_threshold": 0.7,
+      "volatility": "very_high"
+    }
+  },
+  "sector_groups": {
+    "EQUITY": ["BANKING", "IT", "PHARMA", "ENERGY", "FMCG", "AUTO", "METALS", "TELECOM"],
+    "CRYPTO": ["CRYPTO_LARGE", "CRYPTO_MID", "DEFI"],
+    "DEFENSIVE": ["FMCG", "PHARMA", "IT"],
+    "CYCLICAL": ["AUTO", "METALS", "ENERGY", "BANKING"],
+    "HIGH_BETA": ["CRYPTO_LARGE", "CRYPTO_MID", "DEFI", "METALS"],
+    "LOW_BETA": ["FMCG", "IT", "PHARMA"]
+  },
+  "correlation_matrix": {
+    "BANKING": {
+      "IT": 0.3,
+      "PHARMA": 0.2,
+      "ENERGY": 0.4,
+      "FMCG": 0.1,
+      "AUTO": 0.5,
+      "METALS": 0.6,
+      "TELECOM": 0.4
+    },
+    "IT": {
+      "PHARMA": 0.2,
+      "ENERGY": 0.1,
+      "FMCG": 0.3,
+      "AUTO": 0.2,
+      "METALS": 0.1,
+      "TELECOM": 0.3
+    },
+    "CRYPTO_LARGE": {
+      "CRYPTO_MID": 0.8,
+      "DEFI": 0.7,
+      "BANKING": 0.1,
+      "IT": 0.0,
+      "METALS": 0.2
+    }
+  },
+  "momentum_indicators": {
+    "spike_thresholds": {
+      "BANKING": 0.05,
+      "IT": 0.03,
+      "PHARMA": 0.07,
+      "CRYPTO_LARGE": 0.15,
+      "CRYPTO_MID": 0.20
+    },
+    "volume_multipliers": {
+      "BANKING": 2.0,
+      "IT": 1.5,
+      "CRYPTO_LARGE": 3.0,
+      "CRYPTO_MID": 4.0
+    }
+  }
+}
