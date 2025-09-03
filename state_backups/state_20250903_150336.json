@@ -1,0 +1,389 @@
+{
+  "last_run_id": "2025-09-03T15:00:56.061196Z",
+  "scanner": {
+    "sources": [
+      "reddit",
+      "binance",
+      "news",
+      "india_equity"
+    ],
+    "last_offsets": {
+      "reddit": null,
+      "binance": null,
+      "news": null,
+      "india_equity": "2025-09-03T15:00:17.969103Z"
+    }
+  },
+  "decoder": {
+    "correlation_snapshot": {},
+    "recent_alerts": [
+      {
+        "id": "news_pattern_news_308310103120575785",
+        "score": 84.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T12:47:25Z"
+      },
+      {
+        "id": "news_pattern_news_2483151960145297362",
+        "score": 100.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T12:00:21Z"
+      },
+      {
+        "id": "news_pattern_news_2692337713843114397",
+        "score": 74.4,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T11:23:48Z"
+      },
+      {
+        "id": "news_pattern_news_2962741091895259871",
+        "score": 79.20000000000002,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T11:22:02Z"
+      },
+      {
+        "id": "news_pattern_news_3133268056035573620",
+        "score": 87.12000000000002,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T14:30:00Z"
+      },
+      {
+        "id": "news_pattern_news_6966294893130374140",
+        "score": 92.4,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T14:24:32Z"
+      },
+      {
+        "id": "news_pattern_news_2383220662950928930",
+        "score": 81.84000000000002,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T13:30:00Z"
+      },
+      {
+        "id": "news_pattern_news_1846004691722311476",
+        "score": 87.12,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T13:13:42Z"
+      },
+      {
+        "id": "news_pattern_news_8366189903904093934",
+        "score": 100.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T13:06:16Z"
+      },
+      {
+        "id": "news_pattern_news_477058413435175598",
+        "score": 92.4,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T13:01:07Z"
+      },
+      {
+        "id": "news_pattern_news_155391189350705911",
+        "score": 74.4,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T13:00:00Z"
+      },
+      {
+        "id": "news_pattern_news_5613177531260288178",
+        "score": 84.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T12:15:23Z"
+      },
+      {
+        "id": "news_pattern_news_3226408353764163595",
+        "score": 100.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T14:48:36Z"
+      },
+      {
+        "id": "news_pattern_news_7737992756818689014",
+        "score": 100.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T14:15:11Z"
+      },
+      {
+        "id": "news_pattern_news_6546154311943100314",
+        "score": 87.12,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T14:06:05Z"
+      },
+      {
+        "id": "news_pattern_news_8397414644596182698",
+        "score": 100.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T10:41:24Z"
+      },
+      {
+        "id": "news_pattern_news_6774349237461441027",
+        "score": 84.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T10:40:09Z"
+      },
+      {
+        "id": "news_pattern_news_1355789727864506759",
+        "score": 100.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T14:54:30Z"
+      },
+      {
+        "id": "news_pattern_news_5051746686515918826",
+        "score": 100.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T13:07:29Z"
+      },
+      {
+        "id": "news_pattern_news_6118872431467287433",
+        "score": 100.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T11:11:12Z"
+      },
+      {
+        "id": "news_pattern_news_1615520860690875281",
+        "score": 96.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-02T20:56:54Z"
+      },
+      {
+        "id": "news_pattern_news_8871134688957295827",
+        "score": 67.2,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-02T19:00:21Z"
+      },
+      {
+        "id": "news_pattern_news_1140325347295589257",
+        "score": 96.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-02T15:38:01Z"
+      },
+      {
+        "id": "news_pattern_news_2632666894004586079",
+        "score": 100.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T15:00:09Z"
+      },
+      {
+        "id": "news_pattern_news_7520149486001122818",
+        "score": 92.4,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T14:00:23Z"
+      },
+      {
+        "id": "news_pattern_news_1612263607387322026",
+        "score": 84.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T13:00:04Z"
+      },
+      {
+        "id": "news_pattern_news_8061736343172343894",
+        "score": 100.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T12:00:41Z"
+      },
+      {
+        "id": "news_pattern_news_1221640697299389864",
+        "score": 84.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T11:00:28Z"
+      },
+      {
+        "id": "news_pattern_news_4689758994343526273",
+        "score": 84.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T10:35:14Z"
+      },
+      {
+        "id": "news_pattern_news_964797611710588776",
+        "score": 84.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T10:00:30Z"
+      },
+      {
+        "id": "news_pattern_news_525776289246326661",
+        "score": 67.2,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T09:00:31Z"
+      },
+      {
+        "id": "news_pattern_news_4097136047721607372",
+        "score": 96.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T08:00:35Z"
+      },
+      {
+        "id": "news_pattern_news_8322232705552509198",
+        "score": 67.2,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T07:00:32Z"
+      },
+      {
+        "id": "news_pattern_news_8880797707269606824",
+        "score": 63.360000000000014,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T06:31:00Z"
+      },
+      {
+        "id": "news_pattern_news_5266089673300861699",
+        "score": 59.52,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T08:17:37Z"
+      },
+      {
+        "id": "news_pattern_news_1203568096553826977",
+        "score": 84.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T12:56:19Z"
+      },
+      {
+        "id": "news_pattern_news_7661142190731724374",
+        "score": 59.52,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T08:13:43Z"
+      },
+      {
+        "id": "news_pattern_news_5747192273710318553",
+        "score": 74.4,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T12:15:32Z"
+      },
+      {
+        "id": "news_pattern_news_7159328350918351823",
+        "score": 59.52,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T05:13:43Z"
+      },
+      {
+        "id": "news_pattern_news_8178099313731056229",
+        "score": 74.4,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T12:57:21Z"
+      },
+      {
+        "id": "news_pattern_news_3763904937658833208",
+        "score": 84.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T11:00:00Z"
+      },
+      {
+        "id": "news_pattern_news_7285277758359818928",
+        "score": 67.2,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T03:00:32Z"
+      },
+      {
+        "id": "news_pattern_news_531500436337695141",
+        "score": 81.84000000000002,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T13:28:10Z"
+      },
+      {
+        "id": "news_pattern_news_6836943191148166401",
+        "score": 67.2,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T07:02:37Z"
+      },
+      {
+        "id": "news_pattern_news_2529106226586690571",
+        "score": 63.35999999999999,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-02T18:39:51Z"
+      },
+      {
+        "id": "news_pattern_news_4120575772682769519",
+        "score": 67.2,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T00:00:44Z"
+      },
+      {
+        "id": "news_pattern_news_5787762458794371063",
+        "score": 84.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T11:51:27Z"
+      },
+      {
+        "id": "news_pattern_news_80123641990709001",
+        "score": 63.35999999999999,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T00:06:01Z"
+      },
+      {
+        "id": "news_pattern_news_7464914777927476995",
+        "score": 67.2,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T02:36:14Z"
+      },
+      {
+        "id": "news_pattern_news_7736429784981294551",
+        "score": 100.0,
+        "asset": "",
+        "type": "news_impact",
+        "timestamp": "2025-09-03T13:48:42Z"
+      }
+    ]
+  },
+  "executor": {
+    "open_trades": [],
+    "recent_posts": [
+      {
+        "id": "post_1756911650",
+        "subreddit": "CryptoMarkets",
+        "title": "AVAX moving up 6.1% with strong volume",
+        "persona": "analytical",
+        "asset": "AVAX",
+        "pattern_type": "price_movement",
+        "score": 78.8892,
+        "timestamp": "2025-09-03T15:00:50.300350Z"
+      }
+    ]
+  },
+  "config_version": "v1.2.0",
+  "created_at": "2025-09-03T15:00:56.061172Z"
+}
