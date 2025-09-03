@@ -1,0 +1,295 @@
+{
+  "version": "1.2.0",
+  "last_updated": "2025-08-31T12:00:00Z",
+  "platform_permissions": {
+    "trading": {
+      "live_trading_enabled": false,
+      "paper_trading_enabled": true,
+      "max_position_size_usd": 200.0,
+      "max_daily_trades": 5,
+      "max_daily_loss_usd": 500.0,
+      "allowed_exchanges": ["binance"],
+      "allowed_trade_types": ["spot"],
+      "risk_level": "conservative"
+    },
+    "social_media": {
+      "reddit_posting_enabled": true,
+      "reddit_reading_enabled": true,
+      "max_posts_per_day": 5,
+      "max_posts_per_subreddit": 1,
+      "min_post_interval_minutes": 30,
+      "allowed_subreddits": [
+        "CryptoCurrency",
+        "Bitcoin",
+        "ethereum",
+        "CryptoMarkets",
+        "altcoin",
+        "binance",
+        "trading"
+      ],
+      "banned_subreddits": [],
+      "posting_hours": {
+        "start_utc": 6,
+        "end_utc": 22
+      }
+    },
+    "data_collection": {
+      "reddit_scanning_enabled": true,
+      "binance_scanning_enabled": true,
+      "news_scanning_enabled": true,
+      "max_requests_per_minute": {
+        "reddit": 60,
+        "binance": 1200,
+        "news_rss": 10
+      }
+    },
+    "alerts": {
+      "telegram_enabled": true,
+      "discord_enabled": true,
+      "email_enabled": true,
+      "webhook_enabled": true,
+      "max_alerts_per_hour": 20,
+      "min_alert_score": 50.0
+    },
+    "backup": {
+      "github_backup_enabled": true,
+      "encryption_required": true,
+      "auto_backup_enabled": true,
+      "backup_interval_hours": 1,
+      "max_backup_history": 10
+    }
+  },
+  "operational_limits": {
+    "scanner_limits": {
+      "max_events_per_scan": 100,
+      "scan_interval_seconds": 30,
+      "max_concurrent_scans": 3
+    },
+    "decoder_limits": {
+      "max_patterns_per_analysis": 50,
+      "correlation_window_hours": 24,
+      "max_correlation_pairs": 100
+    },
+    "executor_limits": {
+      "max_concurrent_actions": 5,
+      "action_timeout_seconds": 30,
+      "max_retries": 3
+    }
+  },
+  "safety_controls": {
+    "circuit_breakers": {
+      "trading_circuit_breaker": {
+        "enabled": true,
+        "max_losses_before_halt": 3,
+        "halt_duration_minutes": 60
+      },
+      "posting_circuit_breaker": {
+        "enabled": true,
+        "max_failed_posts": 5,
+        "cooldown_minutes": 120
+      },
+      "api_circuit_breaker": {
+        "enabled": true,
+        "max_failures": 10,
+        "recovery_time_minutes": 30
+      }
+    },
+    "rate_limiting": {
+      "global_rate_limit": {
+        "requests_per_minute": 100,
+        "burst_allowance": 20
+      },
+      "per_service_limits": {
+        "reddit": {
+          "requests_per_minute": 60,
+          "posts_per_hour": 2
+        },
+        "binance": {
+          "requests_per_minute": 1200,
+          "orders_per_minute": 10
+        }
+      }
+    }
+  },
+  "compliance_settings": {
+    "data_retention": {
+      "logs_retention_days": 30,
+      "state_backup_retention_days": 90,
+      "alert_history_retention_days": 7
+    },
+    "privacy": {
+      "anonymize_logs": true,
+      "encrypt_sensitive_data": true,
+      "secure_credential_storage": true
+    },
+    "audit": {
+      "log_all_actions": true,
+      "track_api_calls": true,
+      "monitor_performance": true
+    }
+  },
+  "feature_flags": {
+    "experimental_features": {
+      "ml_pattern_recognition": true,
+      "advanced_sentiment_analysis": true,
+      "multi_exchange_arbitrage": false,
+      "adaptive_learning": true,
+      "backtesting_enabled": true,
+      "twitter_integration": false,
+      "regime_detection": true,
+      "stress_testing": true,
+      "copy_trading": false
+    },
+    "phase5_features": {
+      "ai_forecasting": true,
+      "community_simulation": true,
+      "user_acquisition": true,
+      "telegram_engagement": true,
+      "cross_platform_posting": true,
+      "automated_growth": true,
+      "predictive_analytics": true,
+      "monetization": true
+    },
+    "beta_features": {
+      "telegram_commands": true,
+      "real_time_charts": true,
+      "advanced_filters": true,
+      "interactive_screening": true,
+      "community_sharing": true,
+      "mobile_optimization": true
+    },
+    "deprecated_features": {
+      "legacy_api_endpoints": false,
+      "old_state_format": false
+    }
+  },
+  "enhancement_settings": {
+    "adaptive_learning": {
+      "enabled": true,
+      "learning_rate": 0.01,
+      "memory_window": 100,
+      "min_accuracy_threshold": 0.6
+    },
+    "backtesting": {
+      "enabled": true,
+      "historical_periods": 252,
+      "walk_forward_window": 50,
+      "min_training_samples": 100
+    },
+    "regime_detection": {
+      "enabled": true,
+      "volatility_threshold": 0.25,
+      "correlation_threshold": 0.7,
+      "regime_window": 30
+    },
+    "phase5_advanced": {
+      "ai_forecasting": {
+        "enabled": true,
+        "max_predictions_per_day": 50,
+        "forecast_cache_hours": 4,
+        "geopolitical_analysis": true
+      },
+      "community_simulation": {
+        "enabled": true,
+        "max_simulated_posts": 20,
+        "max_community_responses": 100,
+        "viral_detection": true
+      },
+      "user_acquisition": {
+        "enabled": true,
+        "max_campaigns_concurrent": 3,
+        "cross_platform_limit": 50,
+        "seo_optimization": true,
+        "funnel_analytics": true
+      },
+      "telegram_engagement": {
+        "enabled": true,
+        "max_users": 10000,
+        "premium_features": true,
+        "monetization_enabled": true,
+        "auto_moderation": true
+      }
+    }
+  },
+  "account_migration": {
+    "migration_enabled": true,
+    "auto_migration_enabled": false,
+    "migration_triggers": {
+      "credit_threshold_usd": 1.0,
+      "error_rate_threshold": 0.1,
+      "manual_trigger_enabled": true
+    },
+    "migration_settings": {
+      "preserve_open_trades": true,
+      "preserve_posting_history": true,
+      "preserve_alert_settings": true,
+      "backup_before_migration": true
+    }
+  },
+  "monitoring": {
+    "health_checks": {
+      "platform_health_check_interval_seconds": 60,
+      "component_health_timeout_seconds": 30,
+      "alert_on_health_failure": true
+    },
+    "performance_monitoring": {
+      "track_response_times": true,
+      "track_memory_usage": true,
+      "track_api_quotas": true,
+      "performance_alert_threshold": 0.8
+    },
+    "uptime_monitoring": {
+      "expected_uptime_percentage": 99.0,
+      "downtime_alert_enabled": true,
+      "maintenance_window_hours": [2, 3, 4]
+    }
+  },
+  "environment_specific": {
+    "development": {
+      "debug_mode": true,
+      "verbose_logging": true,
+      "mock_trading": true,
+      "reduced_rate_limits": true
+    },
+    "production": {
+      "debug_mode": false,
+      "verbose_logging": false,
+      "strict_validation": true,
+      "enhanced_security": true
+    },
+    "testing": {
+      "mock_all_apis": true,
+      "accelerated_timeouts": true,
+      "test_data_enabled": true
+    }
+  },
+  "validation_rules": {
+    "required_configurations": [
+      "REDDIT_CLIENT_ID",
+      "REDDIT_CLIENT_SECRET",
+      "BINANCE_API_KEY",
+      "BINANCE_SECRET"
+    ],
+    "recommended_configurations": [
+      "TELEGRAM_BOT_TOKEN",
+      "GITHUB_TOKEN",
+      "ENCRYPTION_PASSPHRASE"
+    ],
+    "phase5_configurations": [
+      "TWITTER_API_KEY",
+      "TWITTER_API_SECRET", 
+      "TWITTER_ACCESS_TOKEN",
+      "TWITTER_ACCESS_TOKEN_SECRET",
+      "TELEGRAM_CHANNEL_ID",
+      "DISCORD_INVITE_LINK",
+      "WEBSITE_URL",
+      "PREMIUM_SIGNUP_LINK"
+    ],
+    "validation_checks": {
+      "api_connectivity": true,
+      "credential_validity": true,
+      "permission_verification": true,
+      "rate_limit_compatibility": true
+    }
+  }
+}
