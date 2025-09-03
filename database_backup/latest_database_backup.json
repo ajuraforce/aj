@@ -1,0 +1,14 @@
+{
+  "export_timestamp": "2025-09-03T16:34:11.493090",
+  "database_url": "postgresql://[PROTECTED]",
+  "platform_version": "v1.2.0-enhanced",
+  "tables": {
+    "pattern_outcomes": [],
+    "asset_mentions": [],
+    "correlations": [],
+    "causal_hypotheses": [],
+    "causal_tests": [],
+    "trading_signals": [],
+    "backup_records": []
+  }
+}
