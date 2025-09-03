@@ -1,0 +1,174 @@
+{
+  "crypto": {
+    "BTC": {
+      "symbol": "BTC-USD",
+      "aliases": ["BITCOIN", "BTC", "BITCOINS"],
+      "patterns": ["\\bBTC\\b", "\\bBITCOIN\\b", "\\bBITCOINS\\b"],
+      "market_cap": "large",
+      "exchange": "binance"
+    },
+    "ETH": {
+      "symbol": "ETH-USD", 
+      "aliases": ["ETHEREUM", "ETH", "ETHER"],
+      "patterns": ["\\bETH\\b", "\\bETHEREUM\\b", "\\bETHER\\b"],
+      "market_cap": "large",
+      "exchange": "binance"
+    },
+    "BNB": {
+      "symbol": "BNB-USD",
+      "aliases": ["BINANCE", "BNB", "BINANCE COIN"],
+      "patterns": ["\\bBNB\\b", "\\bBINANCE\\b"],
+      "market_cap": "large",
+      "exchange": "binance"
+    },
+    "ADA": {
+      "symbol": "ADA-USD",
+      "aliases": ["CARDANO", "ADA"],
+      "patterns": ["\\bADA\\b", "\\bCARDANO\\b"],
+      "market_cap": "large",
+      "exchange": "binance"
+    },
+    "XRP": {
+      "symbol": "XRP-USD",
+      "aliases": ["RIPPLE", "XRP"],
+      "patterns": ["\\bXRP\\b", "\\bRIPPLE\\b"],
+      "market_cap": "large",
+      "exchange": "binance"
+    },
+    "SOL": {
+      "symbol": "SOL-USD",
+      "aliases": ["SOLANA", "SOL"],
+      "patterns": ["\\bSOL\\b", "\\bSOLANA\\b"],
+      "market_cap": "large",
+      "exchange": "binance"
+    },
+    "MATIC": {
+      "symbol": "MATIC-USD",
+      "aliases": ["POLYGON", "MATIC"],
+      "patterns": ["\\bMATIC\\b", "\\bPOLYGON\\b"],
+      "market_cap": "medium",
+      "exchange": "binance"
+    },
+    "DOT": {
+      "symbol": "DOT-USD",
+      "aliases": ["POLKADOT", "DOT"],
+      "patterns": ["\\bDOT\\b", "\\bPOLKADOT\\b"],
+      "market_cap": "medium",
+      "exchange": "binance"
+    },
+    "AVAX": {
+      "symbol": "AVAX-USD",
+      "aliases": ["AVALANCHE", "AVAX"],
+      "patterns": ["\\bAVAX\\b", "\\bAVALANCHE\\b"],
+      "market_cap": "medium",
+      "exchange": "binance"
+    },
+    "LINK": {
+      "symbol": "LINK-USD",
+      "aliases": ["CHAINLINK", "LINK"],
+      "patterns": ["\\bLINK\\b", "\\bCHAINLINK\\b"],
+      "market_cap": "medium",
+      "exchange": "binance"
+    }
+  },
+  "indian_equities": {
+    "RELIANCE": {
+      "symbol": "RELIANCE.NS",
+      "aliases": ["RELIANCE", "RIL", "RELIANCE INDUSTRIES"],
+      "patterns": ["\\bRELIANCE\\b", "\\bRIL\\b"],
+      "market_cap": "large",
+      "exchange": "nse",
+      "sector": "energy"
+    },
+    "TCS": {
+      "symbol": "TCS.NS",
+      "aliases": ["TCS", "TATA CONSULTANCY", "TATA CONSULTANCY SERVICES"],
+      "patterns": ["\\bTCS\\b", "\\bTATA CONSULTANCY\\b"],
+      "market_cap": "large",
+      "exchange": "nse",
+      "sector": "it"
+    },
+    "INFY": {
+      "symbol": "INFY.NS",
+      "aliases": ["INFOSYS", "INFY"],
+      "patterns": ["\\bINFY\\b", "\\bINFOSYS\\b"],
+      "market_cap": "large",
+      "exchange": "nse",
+      "sector": "it"
+    },
+    "HDFCBANK": {
+      "symbol": "HDFCBANK.NS",
+      "aliases": ["HDFC", "HDFC BANK", "HDFCBANK"],
+      "patterns": ["\\bHDFC\\b", "\\bHDFC BANK\\b"],
+      "market_cap": "large",
+      "exchange": "nse",
+      "sector": "banking"
+    },
+    "ICICIBANK": {
+      "symbol": "ICICIBANK.NS",
+      "aliases": ["ICICI", "ICICI BANK", "ICICIBANK"],
+      "patterns": ["\\bICICI\\b", "\\bICICI BANK\\b"],
+      "market_cap": "large",
+      "exchange": "nse",
+      "sector": "banking"
+    },
+    "SBIN": {
+      "symbol": "SBIN.NS",
+      "aliases": ["SBI", "STATE BANK", "STATE BANK OF INDIA"],
+      "patterns": ["\\bSBI\\b", "\\bSTATE BANK\\b"],
+      "market_cap": "large",
+      "exchange": "nse",
+      "sector": "banking"
+    },
+    "ITC": {
+      "symbol": "ITC.NS",
+      "aliases": ["ITC"],
+      "patterns": ["\\bITC\\b"],
+      "market_cap": "large",
+      "exchange": "nse",
+      "sector": "fmcg"
+    },
+    "BHARTIARTL": {
+      "symbol": "BHARTIARTL.NS",
+      "aliases": ["BHARTI AIRTEL", "AIRTEL", "BHARTI"],
+      "patterns": ["\\bAIRTEL\\b", "\\bBHARTI\\b"],
+      "market_cap": "large",
+      "exchange": "nse",
+      "sector": "telecom"
+    },
+    "KOTAKBANK": {
+      "symbol": "KOTAKBANK.NS",
+      "aliases": ["KOTAK", "KOTAK BANK", "KOTAK MAHINDRA"],
+      "patterns": ["\\bKOTAK\\b"],
+      "market_cap": "large",
+      "exchange": "nse",
+      "sector": "banking"
+    },
+    "HCLTECH": {
+      "symbol": "HCLTECH.NS",
+      "aliases": ["HCL TECH", "HCL", "HCL TECHNOLOGIES"],
+      "patterns": ["\\bHCL\\b", "\\bHCL TECH\\b"],
+      "market_cap": "large",
+      "exchange": "nse",
+      "sector": "it"
+    }
+  },
+  "indices": {
+    "NIFTY": {
+      "symbol": "^NSEI",
+      "aliases": ["NIFTY50", "NSE", "NIFTY", "SENSEX"],
+      "patterns": ["\\bNIFTY\\b", "\\bNIFTY50\\b", "\\bSENSEX\\b"],
+      "market_cap": "index",
+      "exchange": "nse"
+    }
+  },
+  "synonyms": {
+    "btc": "BTC",
+    "eth": "ETH", 
+    "ril": "RELIANCE",
+    "hdfc": "HDFCBANK",
+    "icici": "ICICIBANK",
+    "bitcoin": "BTC",
+    "ethereum": "ETH"
+  }
+}
