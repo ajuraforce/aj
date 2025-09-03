@@ -1,0 +1,24 @@
+/* src/index.css */
+body {
+  background-color: #f0f2f5;
+  font-family: 'Roboto', sans-serif;
+}
+
+.kpi-card, .card {
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.badge {
+  font-size: 0.85rem;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 500;
+}
