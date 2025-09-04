@@ -1,0 +1,392 @@
+## Enhanced "System Resonance Map" Frontend Implementation
+
+Yeh detailed snippet aapke dashboard ke "System Resonance Map" section ko transform karega. Main yeh assume kar raha hoon ki aapka frontend HTML/CSS/JS pe based hai, aur Chart.js (for sparklines) aur D3.js (for mini network graph) use kar rahe hain. Agar aap React/Vue jaise framework use kar rahe hain, toh isko adapt kar sakte hain.
+
+### Prerequisites
+- Include these libraries in your HTML head:
+  ```html
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  ```
+
+### 1. Updated HTML Structure
+Replace your existing section with this dynamic, expandable card-based layout.
+
+```html
+<div class="system-resonance-map">
+    <div class="section-header">
+        <h3>System Resonance Map</h3>
+        <span class="refresh-btn" onclick="refreshResonanceData()">Refresh</span>
+    </div>
+    
+    <div class="resonance-graph-container">
+        <svg id="resonance-graph" width="100%" height="200"></svg>
+    </div>
+    
+    <div class="resonance-cards">
+        <!-- Cards will be dynamically generated here -->
+    </div>
+    
+    <div class="resonance-summary">
+        <span>Overall Market Resonance: <strong id="overall-score">75%</strong></span>
+        <span>Trending: <strong id="trending-direction">Upward</strong></span>
+    </div>
+</div>
+
+<style>
+.system-resonance-map {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px solid #333;
+    color: white;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.refresh-btn {
+    cursor: pointer;
+    color: #4CAF50;
+    font-size: 14px;
+}
+
+.resonance-graph-container {
+    margin-bottom: 20px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.resonance-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.resonance-card {
+    background: #2a2a2a;
+    padding: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.resonance-card:hover {
+    transform: translateY(-3px);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card-name {
+    font-weight: bold;
+}
+
+.card-score {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card-change-positive {
+    color: #4CAF50;
+}
+
+.card-change-negative {
+    color: #F44336;
+}
+
+.card-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    background: #333;
+}
+
+.badge-bull {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+}
+
+.badge-neutral {
+    background: rgba(255, 152, 0, 0.2);
+    color: #FF9800;
+}
+
+.badge-bear {
+    background: rgba(244, 67, 54, 0.2);
+    color: #F44336;
+}
+
+.card-sparkline {
+    height: 30px;
+    margin: 10px 0;
+}
+
+.card-details {
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #333;
+    font-size: 13px;
+}
+
+.card-details.visible {
+    display: block;
+}
+
+.resonance-summary {
+    text-align: center;
+    padding: 10px;
+    background: #2a2a2a;
+    border-radius: 4px;
+}
+</style>
+```
+
+### 2. JavaScript Implementation
+Add this JS to your dashboard script file. Yeh data fetch karega (assume backend endpoint `/api/resonance-data` se), cards generate karega, mini network graph banayega, aur interactions handle karega.
+
+```javascript
+// Sample backend data structure (replace with real fetch)
+async function fetchResonanceData() {
+    // This is mock data; replace with fetch('/api/resonance-data')
+    return {
+        overall_score: 75,
+        trending_direction: 'Upward',
+        concepts: [
+            {
+                name: 'crypto',
+                score: 90,
+                change: '+15%',
+                badge: 'Bull Bias',
+                trend: 'positive',
+                sparkline_ [40, 55, 70, 65, 80, 90],
+                details: {
+                    mentions: 184,
+                    latest: 'ETF news triggers rally',
+                    action: 'Monitor for breakout'
+                }
+            },
+            {
+                name: 'regulation',
+                score: 50,
+                change: '-5%',
+                badge: 'Watch',
+                trend: 'negative',
+                sparkline_ [60, 55, 50, 45, 55, 50],
+                details: {
+                    mentions: 47,
+                    latest: 'New KYC draft bill discussed',
+                    action: 'Hedge positions'
+                }
+            },
+            // Add more concepts...
+        ],
+        graph: {
+            nodes: [
+                {id: 'crypto', group: 'financial', weight: 90},
+                {id: 'regulation', group: 'policy', weight: 50},
+                {id: 'bitcoin', group: 'financial', weight: 80},
+                // Add more nodes
+            ],
+            edges: [
+                {source: 'crypto', target: 'regulation', strength: 8},
+                {source: 'crypto', target: 'bitcoin', strength: 7},
+                // Add more edges
+            ]
+        }
+    };
+}
+
+// Refresh function
+async function refreshResonanceData() {
+    const data = await fetchResonanceData();
+    
+    // Update overall summary
+    document.getElementById('overall-score').textContent = data.overall_score + '%';
+    document.getElementById('trending-direction').textContent = data.trending_direction;
+    
+    // Generate cards
+    const cardsContainer = document.querySelector('.resonance-cards');
+    cardsContainer.innerHTML = '';
+    data.concepts.forEach(concept => {
+        const card = createResonanceCard(concept);
+        cardsContainer.appendChild(card);
+    });
+    
+    // Update graph
+    createResonanceGraph(data.graph);
+}
+
+// Create individual card
+function createResonanceCard(concept) {
+    const card = document.createElement('div');
+    card.className = 'resonance-card';
+    card.onclick = () => toggleCardDetails(card);
+    
+    card.innerHTML = `
+        <div class="card-header">
+            <span class="card-name">${concept.name}</span>
+            <span class="card-score ${concept.trend}">${concept.score}%</span>
+        </div>
+        <div class="card-change ${concept.trend === 'positive' ? 'card-change-positive' : 'card-change-negative'}">
+            ${concept.change}
+        </div>
+        <canvas class="card-sparkline" width="100" height="30"></canvas>
+        <span class="card-badge ${getBadgeClass(concept.badge)}">${concept.badge}</span>
+        <div class="card-details">
+            <p>Mentions: ${concept.details.mentions}</p>
+            <p>Latest: ${concept.details.latest}</p>
+            <p>Action: ${concept.details.action}</p>
+        </div>
+    `;
+    
+    // Create sparkline
+    const sparklineCtx = card.querySelector('.card-sparkline').getContext('2d');
+    new Chart(sparklineCtx, {
+        type: 'line',
+         {
+            labels: Array(concept.sparkline_data.length).fill(''),
+            datasets: [{
+                 concept.sparkline_data,
+                borderColor: concept.trend === 'positive' ? '#4CAF50' : '#F44336',
+                borderWidth: 2,
+                fill: false,
+                pointRadius: 0
+            }]
+        },
+        options: {
+            scales: { x: { display: false }, y: { display: false } },
+            plugins: { legend: { display: false } },
+            elements: { line: { tension: 0.4 } }
+        }
+    });
+    
+    return card;
+}
+
+function toggleCardDetails(card) {
+    const details = card.querySelector('.card-details');
+    details.classList.toggle('visible');
+}
+
+function getBadgeClass(badge) {
+    if (badge.includes('Bull')) return 'badge-bull';
+    if (badge.includes('Bear')) return 'badge-bear';
+    return 'badge-neutral';
+}
+
+// Mini Network Graph with D3.js
+function createResonanceGraph(graphData) {
+    const svg = d3.select('#resonance-graph');
+    svg.selectAll('*').remove();  // Clear previous graph
+    
+    const width = svg.node().getBoundingClientRect().width;
+    const height = 200;
+    
+    const simulation = d3.forceSimulation(graphData.nodes)
+        .force("link", d3.forceLink(graphData.edges).id(d => d.id).distance(50))
+        .force("charge", d3.forceManyBody().strength(-50))
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        .force("collide", d3.forceCollide(20));
+    
+    const link = svg.append("g")
+        .selectAll("line")
+        .data(graphData.edges)
+        .enter().append("line")
+        .attr("stroke-width", d => d.strength / 2)
+        .attr("stroke", "#666");
+    
+    const node = svg.append("g")
+        .selectAll("circle")
+        .data(graphData.nodes)
+        .enter().append("circle")
+        .attr("r", d => d.weight / 10 + 5)
+        .attr("fill", d => d.group === 'financial' ? '#4CAF50' : '#FF9800');
+    
+    const labels = svg.append("g")
+        .selectAll("text")
+        .data(graphData.nodes)
+        .enter().append("text")
+        .text(d => d.id)
+        .attr("font-size", 10)
+        .attr("dx", 12)
+        .attr("dy", ".35em");
+    
+    simulation.on("tick", () => {
+        link
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
+        
+        node
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y);
+        
+        labels
+            .attr("x", d => d.x)
+            .attr("y", d => d.y);
+    });
+}
+
+// Initial load
+document.addEventListener('DOMContentLoaded', () => {
+    refreshResonanceData();
+});
+```
+
+### Backend Support (app.py)
+Add this endpoint to provide real 
+
+```python
+@app.route('/api/resonance-data', methods=['GET'])
+def api_resonance_data():
+    """Get resonance map data"""
+    try:
+        # Fetch real data from your correlation engine
+        concepts = [
+            {'name': 'crypto', 'score': 90, 'change': '+15%', 'badge': 'Bull Bias', 'trend': 'positive', 
+             'sparkline_data': [40, 55, 70, 65, 80, 90], 
+             'details': {'mentions': 184, 'latest': 'ETF news triggers rally', 'action': 'Monitor for breakout'}},
+            {'name': 'regulation', 'score': 50, 'change': '-5%', 'badge': 'Watch', 'trend': 'negative', 
+             'sparkline_data': [60, 55, 50, 45, 55, 50], 
+             'details': {'mentions': 47, 'latest': 'New KYC draft bill discussed', 'action': 'Hedge positions'}},
+            # Add more from your database...
+        ]
+        
+        graph = {
+            'nodes': [{'id': c['name'], 'group': 'financial', 'weight': c['score']} for c in concepts],
+            'edges': [{'source': concepts[i]['name'], 'target': concepts[i+1]['name'], 'strength': 8} for i in range(len(concepts)-1)]
+        }
+        
+        return jsonify({
+            'overall_score': sum(c['score'] for c in concepts) // len(concepts),
+            'trending_direction': 'Upward' if sum(1 for c in concepts if c['trend'] == 'positive') > len(concepts)/2 else 'Downward',
+            'concepts': concepts,
+            'graph': graph
+        })
+    except Exception as e:
+        logger.error(f"Error getting resonance  {e}")
+        return jsonify({'error': str(e)}), 500
+```
+
+### How to Integrate
+- **Data Flow:** JS mein `fetchResonanceData()` backend se real scores, changes, mentions etc. fetch karega.
+- **Mobile Optimization:** Cards responsive hain, graph SVG se scale karega.
+- **Interactivity:** Cards tap par expand hote hain, refresh button data reload karta hai.
+
+Yeh snippet aapke section ko interactive aur useful bana dega. Agar backend adjustments chahiye ya specific framework (React etc.) ke liye code, toh bataiye!
+
+Sources
