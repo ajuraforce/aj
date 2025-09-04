@@ -173,6 +173,35 @@ class TradingSignal(db.Model):
             'is_active': self.is_active
         }
 
+class Pattern(db.Model):
+    __tablename__ = 'patterns'
+    
+    id = Column(Integer, primary_key=True)
+    timestamp = Column(DateTime, default=func.now())
+    asset = Column(String(20), nullable=False)
+    type = Column(String(50), nullable=False)
+    confidence = Column(Float, default=0.0)
+    signals = Column(Text)
+    price = Column(Float)
+    volume = Column(Float)
+    created_at = Column(DateTime, default=func.now())
+    
+    def __repr__(self):
+        return f'<Pattern {self.asset} {self.type}>'
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'timestamp': self.timestamp.isoformat() if self.timestamp else None,
+            'asset': self.asset,
+            'type': self.type,
+            'confidence': self.confidence,
+            'signals': self.signals,
+            'price': self.price,
+            'volume': self.volume,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+
 class BackupRecord(db.Model):
     __tablename__ = 'backup_records'
     
