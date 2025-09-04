@@ -84,6 +84,13 @@ class Config:
     GITHUB_BRANCH = os.getenv('GITHUB_BRANCH', 'main')
     BACKUP_INTERVAL = int(os.getenv('BACKUP_INTERVAL', '3600'))  # 1 hour
     
+    # TradingView Configuration
+    TRADINGVIEW_ENABLED = os.getenv('TRADINGVIEW_ENABLED', 'true').lower() == 'true'
+    TRADINGVIEW_SCAN_INTERVAL = int(os.getenv('TRADINGVIEW_SCAN_INTERVAL', '300'))  # 5 minutes
+    TRADINGVIEW_SIGNAL_THRESHOLD = float(os.getenv('TRADINGVIEW_SIGNAL_THRESHOLD', '70.0'))
+    TRADINGVIEW_RSI_OVERSOLD = float(os.getenv('TRADINGVIEW_RSI_OVERSOLD', '30.0'))
+    TRADINGVIEW_RSI_OVERBOUGHT = float(os.getenv('TRADINGVIEW_RSI_OVERBOUGHT', '70.0'))
+    
     # Encryption Configuration
     ENCRYPTION_PASSPHRASE = os.getenv('ENCRYPTION_PASSPHRASE', '')
     
