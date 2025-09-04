@@ -146,8 +146,11 @@ function DashboardNewsWidget() {
       {/* Breaking News Ticker */}
       {breakingNews.length > 0 && (
         <Card className="breaking-news-card">
-          <Card.Header className="bg-danger text-white">
+          <Card.Header className="bg-danger text-white d-flex justify-content-between align-items-center">
             <h6 className="mb-0">⚡ Breaking News</h6>
+            <a href="/all-news" className="btn btn-sm btn-outline-light">
+              View All →
+            </a>
           </Card.Header>
           <Card.Body className="p-0">
             <div className="news-ticker-container">
@@ -159,6 +162,7 @@ function DashboardNewsWidget() {
                     <a href={news.link} target="_blank" rel="noopener noreferrer" className="news-link">
                       {news.title}
                     </a>
+                    {news.urgency === 'high' && <span className="badge bg-warning ms-2">HIGH</span>}
                   </div>
                 ))}
               </div>
