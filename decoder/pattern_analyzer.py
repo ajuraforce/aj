@@ -73,6 +73,10 @@ class PatternAnalyzer:
                 elif event['source'] == 'binance':
                     binance_patterns = await self.analyze_binance_event(event)
                     patterns.extend(binance_patterns)
+                elif event['source'] == 'india_equity':
+                    # India equity events have same structure as Binance events
+                    india_patterns = await self.analyze_binance_event(event)
+                    patterns.extend(india_patterns)
                 elif event['source'] == 'news':
                     news_patterns = await self.analyze_news_event(event)
                     patterns.extend(news_patterns)
