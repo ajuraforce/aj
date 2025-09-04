@@ -36,6 +36,7 @@ function Dashboard() {
   const [alerts, setAlerts] = useState({ total: 0, new: 0, recent: [] });
   const [trades, setTrades] = useState({ open: 0, labels: [], data: [], recent: [] });
   const [portfolio, setPortfolio] = useState({ pnl: 0, labels: [], data: [] });
+  const [recentActivity, setRecentActivity] = useState([]);
 
   useEffect(() => {
     loadData();
@@ -51,16 +52,18 @@ function Dashboard() {
 
   async function loadData() {
     try {
-      const [statusRes, alertsRes, tradesRes, portfolioRes] = await Promise.all([
+      const [statusRes, alertsRes, tradesRes, portfolioRes, communityRes] = await Promise.all([
         api.get('/api/status'),
         api.get('/api/alerts'),
         api.get('/api/trades'),
-        api.get('/api/portfolio')
+        api.get('/api/portfolio'),
+        api.get('/api/community/posts?per_page=5')
       ]);
       setStatus(statusRes.data);
       setAlerts(alertsRes.data);
       setTrades(tradesRes.data);
       setPortfolio(portfolioRes.data);
+      setRecentActivity(communityRes.data.posts || []);
     } catch (e) {
       console.error('Error loading dashboard data:', e);
     }
@@ -144,13 +147,26 @@ function Dashboard() {
                   <tr><th>Time</th><th>Type</th><th>Details</th></tr>
                 </thead>
                 <tbody>
-                  {alerts.recent.map((a, i) => (
-                    <tr key={i}>
-                      <td>{a.time}</td>
-                      <td>{a.type}</td>
-                      <td>{a.details}</td>
+                  {recentActivity.length > 0 ? (
+                    recentActivity.map((activity, i) => (
+                      <tr key={i}>
+                        <td>{new Date(activity.timestamp).toLocaleTimeString()}</td>
+                        <td>
+                          <Badge bg={activity.type === 'alert' ? 'danger' : activity.type === 'signal' ? 'success' : 'info'}>
+                            {activity.type.toUpperCase()}
+                          </Badge>
+                        </td>
+                        <td>{activity.content}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="3" className="text-center text-muted py-3">
+                        <i className="bi bi-info-circle me-2"></i>
+                        No recent activity
+                      </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </Table>
             </Card.Body>
