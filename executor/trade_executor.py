@@ -346,13 +346,68 @@ class TradeExecutor:
                 'timestamp': datetime.utcnow().isoformat() + 'Z'
             }
             
+            # Add to memory
             self.open_trades.append(trade_record)
             self.trade_count_today += 1
             
-            logger.info(f"Recorded trade: {trade_record['id']}")
+            # **CRITICAL FIX: Save to database for persistence**
+            await self.save_trade_to_database(trade_record)
+            
+            logger.info(f"Recorded paper trade: {trade_record['id']} - {trade_record['symbol']} {trade_record['direction']} ${trade_record['entry_price']:.4f}")
             
         except Exception as e:
             logger.error(f"Error recording trade: {e}")
+    
+    async def save_trade_to_database(self, trade_record: Dict):
+        """Save paper trade to SQLite database"""
+        try:
+            import sqlite3
+            
+            conn = sqlite3.connect('patterns.db')
+            cursor = conn.cursor()
+            
+            # Create paper_trades table if it doesn't exist
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS paper_trades (
+                    id TEXT PRIMARY KEY,
+                    symbol TEXT NOT NULL,
+                    direction TEXT NOT NULL,
+                    size REAL NOT NULL,
+                    entry_price REAL NOT NULL,
+                    exit_price REAL,
+                    stop_loss REAL,
+                    take_profit REAL,
+                    pattern_id TEXT,
+                    pattern_type TEXT,
+                    score REAL,
+                    status TEXT NOT NULL,
+                    entry_time TEXT NOT NULL,
+                    exit_time TEXT,
+                    pnl REAL DEFAULT 0,
+                    created_at TEXT DEFAULT CURRENT_TIMESTAMP
+                )
+            ''')
+            
+            # Insert the trade record
+            cursor.execute('''
+                INSERT INTO paper_trades 
+                (id, symbol, direction, size, entry_price, stop_loss, take_profit, 
+                 pattern_id, pattern_type, score, status, entry_time)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                trade_record['id'], trade_record['symbol'], trade_record['direction'],
+                trade_record['size'], trade_record['entry_price'], trade_record['stop_loss'],
+                trade_record['take_profit'], trade_record['pattern_id'], trade_record['pattern_type'],
+                trade_record['score'], trade_record['status'], trade_record['timestamp']
+            ))
+            
+            conn.commit()
+            conn.close()
+            
+            logger.info(f"Paper trade {trade_record['id']} saved to database")
+            
+        except Exception as e:
+            logger.error(f"Error saving trade to database: {e}")
     
     async def check_sufficient_balance(self) -> bool:
         """Check if there's sufficient balance for trading"""
